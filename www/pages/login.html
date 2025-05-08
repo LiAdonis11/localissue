@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | Issue Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --background: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #222222;
+            --border-color: #cccccc;
+            --primary-color: #444444;
+            --primary-color-light: #666666;
+            --error-color: #cc3333;
+            --button-bg: #444444;
+            --button-hover-bg: #222222;
+            --link-color: #444444;
+            --link-hover-color: #222222;
+            --focus-ring: rgba(74, 144, 226, 0.4);
+        }
+        body {
+            background: var(--background);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e6e6e6 100%);
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            padding: 2rem 2.5rem;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            object-fit: contain;
+        }
+        h3 {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+        form {
+            text-align: left;
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--primary-color);
+        }
+        .input-group {
+            position: relative;
+        }
+        .input-group .form-control {
+            padding-left: 2.5rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-group .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--border-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+        input[type="email"]:focus + .input-icon {
+            color: var(--primary-color);
+        }
+        input[type="password"]:focus + .input-icon {
+            color: var(--primary-color);
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            background: #fff;
+            box-shadow: none;
+        }
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px var(--focus-ring);
+        }
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            min-height: 1.2em;
+        }
+        #errorAlert {
+            background-color: var(--error-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--border-color);
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+        .input-group input:focus ~ .password-toggle {
+            opacity: 0;
+            visibility: hidden;
+        }
+        button[type="submit"] {
+            width: 100%;
+            background-color: var(--button-bg);
+            border: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.75rem 0;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        button[type="submit"]:hover,
+        button[type="submit"]:focus {
+            background-color: var(--button-hover-bg);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .spinner-border {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.15em;
+            display: none;
+        }
+        .spinner-border.visible {
+            display: inline-block;
+        }
+        .text-center a {
+            color: var(--link-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .text-center a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" role="main" aria-labelledby="loginTitle">
+        <img src="../assets/logo.jpg" alt="Issue Tracker Logo" class="logo" />
+        <h3 id="loginTitle">Login</h3>
+        <div id="errorAlert" role="alert" aria-live="assertive"></div>
+        <form id="loginForm" novalidate>
+            <div class="input-group mb-3">
+                <input type="email" id="email" name="email" aria-describedby="emailError" required placeholder="Email" class="form-control" />
+                <i class="bi bi-envelope input-icon"></i>
+            </div>
+            <div class="input-group mb-3 position-relative">
+                <input type="password" id="password" name="password" aria-describedby="passwordError" required placeholder="Password" class="form-control" />
+                <i class="bi bi-lock input-icon"></i>
+                <i id="togglePassword" class="bi bi-eye password-toggle" title="Show/Hide Password" role="button" tabindex="0" aria-label="Show or hide password"></i>
+            </div>
+            <div class="error-message" id="emailError" aria-live="polite"></div>
+            <div class="error-message" id="passwordError" aria-live="polite"></div>
+
+            <button type="submit" id="submitBtn" aria-live="polite" aria-busy="false">
+                <span class="spinner-border" role="status" aria-hidden="true"></span>
+                Login
+            </button>
+        </form>
+        <p class="text-center mt-4">
+            <a href="register.html">Don't have an account? Register</a>
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorAlert = document.getElementById('errorAlert');
+            const passwordInput = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+
+            const showError = (field, message) => {
+                const input = document.getElementById(field);
+                const errorElement = document.getElementById(`${field}Error`);
+                input.setAttribute('aria-invalid', 'true');
+                errorElement.textContent = message;
+            };
+
+            const clearErrors = () => {
+                ['email', 'password'].forEach(field => {
+                    const input = document.getElementById(field);
+                    input.removeAttribute('aria-invalid');
+                    document.getElementById(`${field}Error`).textContent = '';
+                });
+                errorAlert.style.display = 'none';
+                errorAlert.textContent = '';
+            };
+
+            const validateForm = () => {
+                clearErrors();
+                let isValid = true;
+                const email = form.email.value.trim();
+                const password = form.password.value;
+
+                if (!email) {
+                    showError('email', 'Email is required');
+                    isValid = false;
+                } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                    showError('email', 'Invalid email format');
+                    isValid = false;
+                }
+
+                if (!password) {
+                    showError('password', 'Password is required');
+                    isValid = false;
+                }
+
+                return isValid;
+            };
+
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.classList.toggle('bi-eye');
+                togglePassword.classList.toggle('bi-eye-slash');
+            });
+
+            togglePassword.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    togglePassword.click();
+                }
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!validateForm()) return;
+
+                submitBtn.disabled = true;
+                submitBtn.setAttribute('aria-busy', 'true');
+                submitBtn.querySelector('.spinner-border').classList.add('visible');
+
+                try {
+                    const response = await fetch('../../php/login.php', {
+                        method: 'POST',
+                        body: new FormData(form)
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(result.message || 'Login failed');
+                    }
+
+                    if (result.success) {
+                        localStorage.setItem('user', JSON.stringify(result.user));
+                        const dashboardPath =
+                            result.user.role === 'captain'
+                                ? '../dashboard/captain-dashboard.html'
+                                : result.user.role === 'official'
+                                ? '../dashboard/official-dashboard.html'
+                                : '../dashboard/user-dashboard.html';
+                        window.location.href = dashboardPath;
+                    } else {
+                        errorAlert.textContent = result.message;
+                        errorAlert.style.display = 'block';
+                    }
+                } catch (error) {
+                    errorAlert.textContent = error.message;
+                    errorAlert.style.display = 'block';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.setAttribute('aria-busy', 'false');
+                    submitBtn.querySelector('.spinner-border').classList.remove('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

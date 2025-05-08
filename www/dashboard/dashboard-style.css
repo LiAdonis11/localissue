@@ -1,0 +1,312 @@
+/* Shared dashboard styles for user, captain, and official dashboards */
+
+/* Color Palette */
+:root {
+    --primary-color: #1e3a8a; /* Indigo-800 */
+    --primary-color-light: #3b82f6; /* Indigo-500 */
+    --secondary-color: #6b7280; /* Gray-500 */
+    --background-color: #f9fafb; /* Gray-50 */
+    --card-bg-color: #ffffff;
+    --border-color: #e5e7eb; /* Gray-200 */
+    --text-color: #111827; /* Gray-900 */
+    --text-muted-color: #6b7280; /* Gray-500 */
+    --success-color: #10b981; /* Emerald-500 */
+    --warning-color: #f59e0b; /* Amber-500 */
+    --danger-color: #ef4444; /* Red-500 */
+    --focus-ring-color: rgba(59, 130, 246, 0.5); /* Indigo-500 with opacity */
+}
+
+/* Base styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Text muted */
+.text-muted {
+    color: var(--text-muted-color) !important;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--card-bg-color);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    border-right: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    z-index: 1050;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.app-logo {
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    user-select: none;
+}
+
+.sidebar .nav-link {
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin: 6px 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar .nav-link i {
+    font-size: 1.3rem;
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: var(--primary-color-light);
+    color: white;
+}
+
+.sidebar .nav-link:hover i,
+.sidebar .nav-link.active i {
+    opacity: 1;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 260px;
+    padding: 32px 40px;
+    transition: margin-left 0.3s ease, padding 0.3s ease;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+/* Page titles and subtitles */
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover,
+.card:focus-within {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+/* Stat cards */
+.stat-card {
+    border-left: 6px solid var(--primary-color);
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+.stat-card:hover,
+.stat-card:focus-within {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    opacity: 0.85;
+    margin-right: 1rem;
+}
+
+.stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--text-muted-color);
+}
+
+/* Buttons */
+.btn {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--primary-color-light);
+    border-color: var(--primary-color-light);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.6);
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Table */
+.table {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
+}
+
+.table thead tr th {
+    font-weight: 700;
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1rem;
+}
+
+.table tbody tr {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.table tbody tr:hover,
+.table tbody tr:focus-within {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.table tbody tr td {
+    border: none;
+    padding: 1rem 1.25rem;
+    vertical-align: middle;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.status-pending {
+    background-color: #fef3c7; /* amber-100 */
+    color: #b45309; /* amber-700 */
+}
+
+.status-in-progress {
+    background-color: #bfdbfe; /* blue-200 */
+    color: #2563eb; /* blue-600 */
+}
+
+.status-resolved {
+    background-color: #bbf7d0; /* green-200 */
+    color: #15803d; /* green-700 */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 1.5rem;
+        box-shadow: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem 1.5rem;
+    }
+
+    .sidebar .nav-link {
+        margin: 0.25rem 0;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+
+    .sidebar .nav-link i {
+        font-size: 1.25rem;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+}
